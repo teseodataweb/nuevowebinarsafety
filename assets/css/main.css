@@ -8173,7 +8173,7 @@ input:focus::placeholder, textarea:focus::placeholder {
 }
 
 .ns-counter-item:hover .ns-counter-item-content {
-  background-color: rgba(253, 166, 16, 0.8);
+  background-color: #008C1F;
 }
 .ns-counter-item:hover .ns-counter-title {
   color: #fff;

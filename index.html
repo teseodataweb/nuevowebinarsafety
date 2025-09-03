@@ -152,138 +152,144 @@
             </section>
             <!-- banner area end -->
 
-                        <!-- contact area start -->
-                        <section class="pt-110 pb-115">
-                            <div class="ns-contact-container container">
-                                <div class="ns-inner-wrap">
-                                    <div class="ns-contact-space">
-                                        <div class="ns-contact-wrap">
-                                            <div class="ns-contact-left">
-                                                <div class="ns-section mb-35">
-                                                    <span class="ns-section-subtitle">ACCEDE HOY</span>
-                                                    <h2 class="ns-section-title mb-15">Regístrate al Webinar Seguridad Inteligente 2025</h2>
-                                                    <p class="ns-section-text mb-0">Asegura tu lugar en una de nuestras próximas sesiones en vivo.</p>
-                                                </div>
-                                                <div class="ns-contact-form" id="register-web">
-                                                    <form class="webinar-form" action="#">
-                                                        <div class="row g-3">
-                                                          <div class="col-sm-6">
-                                                            <label for="full_name" class="form-label">Nombre completo</label>
-                                                            <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Nombre completo" required>
-                                                          </div>
-                                                          <div class="col-sm-6">
-                                                            <label for="company" class="form-label">Empresa</label>
-                                                            <input type="text" class="form-control" id="company" name="company" placeholder="Empresa" required>
-                                                          </div>
-                                                          <div class="col-sm-6">
-                                                            <label for="job_title" class="form-label">Cargo/Puesto</label>
-                                                            <input type="text" class="form-control" id="job_title" name="job_title" placeholder="Cargo/Puesto" required>
-                                                          </div>
-                                                          <div class="col-sm-6">
-                                                            <label for="email" class="form-label">Correo electrónico</label>
-                                                            <input type="email" class="form-control" id="email" name="email" placeholder="Correo electrónico" required>
-                                                          </div>
-                                                          <div class="col-sm-6">
-                                                            <label for="phone" class="form-label">Teléfono</label>
-                                                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Teléfono" required>
-                                                          </div>
-                                                      
-                                                          <div class="col-12">
-                                                            <label for="session_date" class="form-label">Fecha de sesión</label>
-                                                            <select class="form-select" id="session_date" name="session_date" required>
-                                                              <option value="" disabled selected>Selecciona tu fecha de sesión</option>
-                                                              <option value="2025-09-15">15 de septiembre 2025</option>
-                                                              <option value="2025-09-17">17 de septiembre 2025</option>
-                                                              <option value="2025-09-19">19 de septiembre 2025</option>
-                                                            </select>
-                                                          </div>
-                                                      
-                                                          <div class="col-12">
-                                                            <button type="submit" class="btn btn-primary w-100" id="submit_button">Agendar mi lugar</button>
-                                                          </div>
-                                                          <script>
-                                                            document.addEventListener('DOMContentLoaded', function() {
-                                                              const sessionDateSelect = document.getElementById('session_date');
-                                                              const submitButton = document.getElementById('submit_button');
-                                                              const defaultButtonText = 'Agendar mi lugar';
-                                                      
-                                                              function updateButtonText() {
-                                                                const selectedOption = sessionDateSelect.options[sessionDateSelect.selectedIndex];
-                                                                if (selectedOption && selectedOption.value !== '') {
-                                                                  submitButton.textContent = `Agendar el ${selectedOption.textContent}`;
-                                                                } else {
-                                                                  submitButton.textContent = defaultButtonText;
-                                                                }
-                                                              }
-                                                      
-                                                              // Set initial button text based on selection (will be default as "Selecciona..." is selected)
-                                                              updateButtonText();
-                                                      
-                                                              // Update button text when the selection changes
-                                                              sessionDateSelect.addEventListener('change', updateButtonText);
-                                                            });
-                                                          </script>
-                                                        </div>
-                                                      </form>
-                                                      
-                                                      
-                                                      
-                                                </div>
-                                            </div>
-                                            <div class="ns-contact-right">
-                                                <div class="ns-contact-info">
-                                                    <span class="ns-contact-circle-1"></span>
-                                                    <span class="ns-contact-circle-2"></span>
-                                                    <img src="assets/img/contact/contact.jpg" alt="Not Found" class="ns-contact-bg-img">
-                                                    <img class="ns-contact-shape ns-contact-shape-1" src="assets/img/contact/contact-map.png" alt="Not Found">
-                                                    <img class="ns-contact-shape ns-contact-shape-2" src="assets/img/contact/contact-map.png" alt="Not Found">
-                                                    <img class="ns-contact-shape ns-contact-shape-3" src="assets/img/contact/contact-map.png" alt="Not Found">
-                                                    <div class="ns-contact-item ns-phone">
-                                                        <div class="ns-contact-item-icon">
-                                                            <i class="icofont-ui-call"></i>
-                                                        </div>
-                                                        <div class="ns-contact-item-details">
-                                                            <span>Nuestras certificaciones</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="ns-contact-item ns-mail">
-                                                        <div class="ns-contact-item-icon">
-                                                            <i class="icofont-envelope"></i>
-                                                        </div>
-                                                        <div class="ns-contact-item-details">
-                                                            <span>Mail Us</span>
-                                                            <div>
-                                                                <a href="mailto:rubel@eobi.com
-                                                                ">rubel@eobi.com
-                                                                    </a>
-                                                                <a href="mailto:moraty@bara.com
-                                                                ">moraty@bara.com
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="ns-contact-item ns-address">
-                                                        <div class="ns-contact-item-icon">
-                                                            <i class="icofont-location-pin"></i>
-                                                        </div>
-                                                        <div class="ns-contact-item-details">
-                                                            <span>Address</span>
-                                                            <p>20, 25 Dhaka,0123 <br>
-                                                                Ratrba baraj,20</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="ns-contact-map">
-                                                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d12677670.27170986!2d26.611266975183028!3d49.282320776259766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1646059574165!5m2!1sen!2sbd"></iframe>
-                                                </div>
-                                            </div>
-                                        </div>
+<!-- contact area start -->
+<section class="pt-110 pb-115">
+    <div class="ns-contact-container container">
+        <div class="ns-inner-wrap">
+            <div class="ns-contact-space">
+                <div class="ns-contact-wrap">
+                    
+                    <!-- Columna izquierda: Formulario -->
+                    <div class="ns-contact-left">
+                        <div class="ns-section mb-35">
+                            <span class="ns-section-subtitle">ACCEDE HOY</span>
+                            <h2 class="ns-section-title mb-15">Regístrate al Webinar Seguridad Inteligente 2025</h2>
+                            <p class="ns-section-text mb-0">Asegura tu lugar en una de nuestras próximas sesiones en vivo.</p>
+                        </div>
+                        <div class="ns-contact-form" id="register-web">
+                            <form class="webinar-form" action="#">
+                                <div class="row g-3">
+                                    <div class="col-sm-6">
+                                        <label for="full_name" class="form-label">Nombre completo</label>
+                                        <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Nombre completo" required>
                                     </div>
+                                    <div class="col-sm-6">
+                                        <label for="company" class="form-label">Empresa</label>
+                                        <input type="text" class="form-control" id="company" name="company" placeholder="Empresa" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="job_title" class="form-label">Cargo/Puesto</label>
+                                        <input type="text" class="form-control" id="job_title" name="job_title" placeholder="Cargo/Puesto" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="email" class="form-label">Correo electrónico</label>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Correo electrónico" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="phone" class="form-label">Teléfono</label>
+                                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Teléfono" required>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="session_date" class="form-label">Fecha de sesión</label>
+                                        <select class="form-select" id="session_date" name="session_date" required>
+                                            <option value="" disabled selected>Selecciona tu fecha de sesión</option>
+                                            <option value="2025-09-15">15 de septiembre 2025 · 10:00 h</option>
+                                            <option value="2025-09-17">17 de septiembre 2025 · 10:00 h</option>
+                                            <option value="2025-09-19">19 de septiembre 2025 · 10:00 h</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary w-100" id="submit_button">Agendar mi lugar</button>
+                                    </div>
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                            const sessionDateSelect = document.getElementById('session_date');
+                                            const submitButton = document.getElementById('submit_button');
+                                            const defaultButtonText = 'Agendar mi lugar';
+
+                                            function updateButtonText() {
+                                                const selectedOption = sessionDateSelect.options[sessionDateSelect.selectedIndex];
+                                                if (selectedOption && selectedOption.value !== '') {
+                                                    submitButton.textContent = `Agendar el ${selectedOption.textContent}`;
+                                                } else {
+                                                    submitButton.textContent = defaultButtonText;
+                                                }
+                                            }
+
+                                            updateButtonText();
+                                            sessionDateSelect.addEventListener('change', updateButtonText);
+                                        });
+                                    </script>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Columna derecha: Valor + Beneficios -->
+                    <div class="ns-contact-right">
+                        <div class="ns-contact-info">
+                            <span class="ns-contact-circle-1"></span>
+                            <span class="ns-contact-circle-2"></span>
+                            <img src="assets/img/contact/contact.jpg" alt="Not Found" class="ns-contact-bg-img">
+                            <img class="ns-contact-shape ns-contact-shape-1" src="assets/img/contact/contact-map.png" alt="Not Found">
+                            <img class="ns-contact-shape ns-contact-shape-2" src="assets/img/contact/contact-map.png" alt="Not Found">
+                            <img class="ns-contact-shape ns-contact-shape-3" src="assets/img/contact/contact-map.png" alt="Not Found">
+
+                            <!-- Valor del curso -->
+                            <div class="ns-contact-item ns-phone">
+                                <div class="ns-contact-item-icon">
+                                    <i class="icofont-price"></i>
+                                </div>
+                                <div class="ns-contact-item-details">
+                                    <span>Valor del curso</span>
+                                    <p>Valuado en <strong>$4,000 MXN</strong>, hoy <strong>GRATUITO</strong>.</p>
                                 </div>
                             </div>
-            
-                        </section>
-                        <!-- contact area end -->
+
+                            <!-- Beneficio 1 -->
+                            <div class="ns-contact-item ns-mail">
+                                <div class="ns-contact-item-icon">
+                                    <i class="icofont-discount"></i>
+                                </div>
+                                <div class="ns-contact-item-details">
+                                    <span>Descuento exclusivo</span>
+                                    <p>% de descuento en tu <strong>primera compra de EPP</strong>.</p>
+                                </div>
+                            </div>
+
+                            <!-- Beneficio 2 -->
+                            <div class="ns-contact-item ns-address">
+                                <div class="ns-contact-item-icon">
+                                    <i class="icofont-graduate"></i>
+                                </div>
+                                <div class="ns-contact-item-details">
+                                    <span>Más cursos gratuitos</span>
+                                    <p>Acceso a <strong>cursos adicionales</strong> con normativas ISO/NOM incluidas.</p>
+                                </div>
+                            </div>
+
+                            <!-- Beneficio 3 -->
+                            <div class="ns-contact-item ns-address">
+                                <div class="ns-contact-item-icon">
+                                    <i class="icofont-businessman"></i>
+                                </div>
+                                <div class="ns-contact-item-details">
+                                    <span>Consultoría/Diagnóstico</span>
+                                    <p>Sesión de <strong>diagnóstico gratuito</strong> para tu industria.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- contact area end -->
+
 
             <!-- feature area start -->
             <section class="ns-feature-area" id="beneficios">
@@ -466,10 +472,10 @@
                                             <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">15 de septiembre 2025</button>
                                             </li>
                                             <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">17 de septiembre 2025</button>
+                                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">17 de septiembre 2025</button>
                                             </li>
                                             <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">19 de septiembre 2025</button>
+                                            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">19 de septiembre 2025</button>
                                             </li>
                                         </ul>
                                     </div>
@@ -487,22 +493,22 @@
                                                             <li>
                                                                 <span class="ns-custom-content-bottom-icon"><i class="icofont-check"></i></span>
                                                                 <div class="ns-custom-content-bottom-info">
-                                                                    <h5>Prevención de riesgos críticos</h5>
-                                                                    <p>Con el ícono de alerta, exploramos los accidentes más comunes en minería y cómo evitarlos antes de que se conviertan en sanciones o cierres de operación.</p>
+                                                                    <h5>Identifica y controla los riesgos</h5>
+                                                                    <p>Cada industria enfrenta amenazas particulares. Aquí aprenderás a reconocer los riesgos críticos que impactan directamente la operación y cómo reducirlos antes de que generen pérdidas o sanciones.</p>
                                                                 </div>
                                                             </li>
                                                             <li>
                                                                 <span class="ns-custom-content-bottom-icon"><i class="icofont-check"></i></span>
                                                                 <div class="ns-custom-content-bottom-info">
-                                                                    <h5>Normativas mineras y casos reales</h5>
-                                                                    <p>El ícono de libro guía este bloque → revisamos NOM, ISO y ANSI aplicables a la minería y compartimos ejemplos reales de minas que redujeron incidentes con el cumplimiento correcto.</p>
+                                                                    <h5>Normas clave y ejemplos que marcan la diferencia</h5>
+                                                                    <p>Revisamos las normativas NOM, ISO y ANSI más relevantes en seguridad industrial. Además, hablamos organizaciones que redujeron incidentes, evitaron multas y superaron auditorías con éxito.</p>
                                                                 </div>
                                                             </li>
                                                             <li>
                                                                 <span class="ns-custom-content-bottom-icon"><i class="icofont-check"></i></span>
                                                                 <div class="ns-custom-content-bottom-info">
-                                                                    <h5>Checklist de acción inmediata</h5>
-                                                                    <p>Con el ícono de checklist y calendario, entregamos un plan práctico de prevención, protocolos de inspección y materiales descargables para implementar en tu mina desde el primer día</p>
+                                                                    <h5>Tu plan práctico para aplicar mañana mismo</h5>
+                                                                    <p>El objetivo: que tu equipo pueda implementar medidas de prevención y cumplimiento desde el primer día, sin esperar a la próxima auditoría.</p>
                                                                 </div>
                                                             </li>
                                                         </ul>
@@ -633,7 +639,7 @@
                                 </div>
                                 <div class="ns-recent-item-content">
                                     <h4 class="ns-recent-title"><a href="project-details.html">Checklist descargable</a></h4>
-                                    <p>Asegura el cumplimiento en tu operación minera desde el primer día.
+                                    <p>Asegura el cumplimiento en tu operación desde el primer día.
                                         </p>
                                 </div>
                             </div>
@@ -689,6 +695,122 @@
             <!-- recent area end -->
             <!-- service area end -->
 
+                        <!-- testimonial area start -->
+                        <section class="ns-testimonial-area-4">
+                            <div class="ns-testimonial-wrap-4">
+                                <div class="ns-testimonial-content-4">
+                                    <img src="assets/img/testimonial/quote-52.png" alt="" class="ns-testimonial-quote-4">
+                                    <img src="assets/img/testimonial/home-4_map.png" alt="" class="ns-testimonial-map-4">
+                                    <div class="ns-testimonial-content-inner-4">
+                                        <div class="swiper-container testimonial-active-4">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide">
+                                                    <div class="ns-testimonial-content">
+                                                        <img class="ns-testimonial-admin-4" src="assets/img/testimonial/testimonial-admin-4.png" alt="Not Found">
+                                                        <p>Trabajamos en manufactura automotriz y el principal problema eran las constantes observaciones en auditorías de seguridad. Con las guías y el acompañamiento de AP Safety logramos cumplir con las normativas y reducir incidentes.</p>
+                                                        <div class="ns-testimonial-admin">
+                                                            <h4 class="ns-testimonial-admin-title">
+                                                                Manufactura
+                                                            </h4>
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <div class="ns-testimonial-content">
+                                                        <img class="ns-testimonial-admin-4" src="assets/img/testimonial/testimonial-admin-4.png" alt="Not Found">
+                                                        <p>En obra siempre hay riesgos. Lo que más valoramos es que los equipos de AP Safety están certificados en México y cumplen con estándares internacionales. Eso nos ha evitado multas y nos da confianza al presentar nuestros proyectos a clientes.</p>
+                                                        <div class="ns-testimonial-admin">
+                                                            <h4 class="ns-testimonial-admin-title">
+                                                                Construcción
+                                                            </h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <div class="ns-testimonial-content">
+                                                        <img class="ns-testimonial-admin-4" src="assets/img/testimonial/testimonial-admin-4.png" alt="Not Found">
+                                                        <p>El sector minero exige protocolos muy estrictos. Antes teníamos problemas de suministro y calidad. Con AP Safety encontramos un proveedor confiable con cobertura nacional y soporte técnico que entiende realmente las normas que aplican a nuestra industria.</p>
+                                                        <div class="ns-testimonial-admin">
+                                                            <h4 class="ns-testimonial-admin-title">
+                                                                Minería
+                                                            </h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="ns-testimonial-pagination mt-30"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ns-testimonial-counter-4">
+                                    <img src="assets/img/testimonial/home-4_shape-1.png" alt="" class="ns-testimonial-counter-img-4">
+                                    <div class="ns-testimonial-counter-inner-4">
+                                
+                                        <!-- Empresa 100% mexicana -->
+                                        <div class="ns-counter-item mb-65">
+                                            <div class="ns-counter-item-img w_img">
+                                                <img src="assets/img/counter/counter-1.jpg" alt="Not Found">
+                                            </div>
+                                            <div class="ns-counter-item-content">
+                                                <h2 class="ns-counter-title"><span class="odometer counter_count" data-count="100">00</span><span class="ns-counter-plus">%</span></h2>
+                                                <span class="ns-counter-subtitle">Mexicana</span>
+                                                <div class="ns-counter-icon">
+                                                    <i class="icofont-flag"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                
+                                        <!-- Certificaciones -->
+                                        <div class="ns-counter-item mb-65">
+                                            <div class="ns-counter-item-img w_img">
+                                                <img src="assets/img/counter/counter-1.jpg" alt="Not Found">
+                                            </div>
+                                            <div class="ns-counter-item-content">
+                                                <h2 class="ns-counter-title"><span class="odometer counter_count" data-count="10">00</span><span class="ns-counter-plus">+</span></h2>
+                                                <span class="ns-counter-subtitle">Certificaciones</span>
+                                                <div class="ns-counter-icon">
+                                                    <i class="icofont-certificate"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="ns-testimonial-counter-inner-4 inner-41">
+                                
+                                        <!-- Cobertura -->
+                                        <div class="ns-counter-item mb-65">
+                                            <div class="ns-counter-item-img w_img">
+                                                <img src="assets/img/counter/counter-1.jpg" alt="Not Found">
+                                            </div>
+                                            <div class="ns-counter-item-content">
+                                                <h2 class="ns-counter-title"><span class="odometer counter_count" data-count="32">00</span><span class="ns-counter-plus">+</span></h2>
+                                                <span class="ns-counter-subtitle">Estados</span>
+                                                <div class="ns-counter-icon">
+                                                    <i class="icofont-world"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                
+                                        <!-- Experiencia -->
+                                        <div class="ns-counter-item mb-65">
+                                            <div class="ns-counter-item-img w_img">
+                                                <img src="assets/img/counter/counter-1.jpg" alt="Not Found">
+                                            </div>
+                                            <div class="ns-counter-item-content">
+                                                <h2 class="ns-counter-title"><span class="odometer counter_count" data-count="15">00</span><span class="ns-counter-plus">+</span></h2>
+                                                <span class="ns-counter-subtitle">Años</span>
+                                                <div class="ns-counter-icon">
+                                                    <i class="icofont-businessman"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </section>
+                        <!-- testimonial area end -->
+
 
             <!-- cta area start -->
             <div class="ns-cta-area bg-default pt-275 pb-115" data-background="assets/img/cta/cta-bg.jpg">
@@ -700,7 +822,7 @@
                         <div class="col-xl-8">
                             <div class="ns-cta-content">
                                 <span class="ns-cta-content-subtitle">Apartar mi lugar sin costo</span>
-                                <h2 class="ns-cta-content-title">Prevén sanciones y protege a tu equipo minero</h2>
+                                <h2 class="ns-cta-content-title">Prevén sanciones y protege a tu equipo industrial</h2>
                                 <span class="ns-cta-contact">📅 Próximas fechas: 15, 17 y 19 de septiembre · Sesión en vivo sin costo.</span>
                                 <a href="#register-web" class="ns-theme-btn">Quiero mi acceso y materiales<i class="fal fa-arrow-right"></i></a>
                             </div>
