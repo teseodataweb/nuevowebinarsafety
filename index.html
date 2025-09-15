@@ -1095,11 +1095,15 @@
                 populateTimes(); // limpia horarios
               }
           
-              function toReadableDate(iso) {
-                // Mostrar como "1 de octubre" en es-MX
-                const dt = new Date(iso + 'T12:00:00'); // evitar TZ offset
-                return dt.toLocaleDateString('es-MX', { day: 'numeric', month: 'long' });
-              }
+             
+                function toReadableDate(iso) {
+                    // Esperamos 'YYYY-MM-DD'
+                    const parts = iso.split('-');
+                    if (parts.length !== 3) return iso; // fallback, por si llegara algo raro
+                    const [y, m, d] = parts.map(Number);
+                    const dt = new Date(y, m - 1, d);
+                    return dt.toLocaleDateString('es-MX', { day: 'numeric', month: 'long' });
+                }
           
               function populateTimes() {
                 sessionTimeSelect.innerHTML = '<option value="" disabled selected>Selecciona tu horario de sesión</option>';
