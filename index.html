@@ -32,6 +32,25 @@
 
         gtag('config', 'G-W39ESVW5SF');
         </script>
+        <style>
+            .loading-overlay {
+              position: fixed; inset: 0; background: rgba(255,255,255,0.75);
+              display: none; align-items: center; justify-content: center; z-index: 9999;
+            }
+            .loading-overlay.active { display: flex; }
+            .spinner {
+              width: 54px; height: 54px; border-radius: 50%;
+              border: 6px solid #e9ecef; border-top: 6px solid #0d6efd;
+              animation: spin 1s linear infinite;
+            }
+            @keyframes spin { to { transform: rotate(360deg); } }
+            .alert { border-radius: 10px; padding: 12px 14px; margin-top: 12px; display: none; }
+            .alert.show { display: block; }
+            .alert-success { background: #e6f4ea; color: #0b6b2d; border: 1px solid #b7e1c1; }
+            .alert-danger  { background: #fde8e8; color: #7a0916; border: 1px solid #f5c2c7; }
+          </style>
+          
+          
     </head>
      
     <body>
@@ -90,7 +109,7 @@
                                 </nav>
                                 <div class="ns-header-menu-right">
                                     <div class="ns-header-menu-btn d-none d-xl-block">
-                                        <a href="contact.html" class="ns-header-btn ns-theme-btn">Reservar fecha<i class="fal fa-arrow-right"></i></a>
+                                        <a href="#register" class="ns-header-btn ns-theme-btn">Reservar fecha<i class="fal fa-arrow-right"></i></a>
                                     </div>
                                     <div class="menu-bar d-lg-none">
                                         <div class="navbar-sign side-toggle ml-20">
@@ -135,7 +154,7 @@
                                             </h2>
                                             <p>Previene multas y fortalece tu seguridad industrial en 30 minutos</p>
                                             <div class="ns-banner-action-btn">
-                                                <a href="contact.html" class="ns-header-btn ns-theme-btn">Comenzar mi registro<i class="fal fa-arrow-right"></i></a>
+                                                <a href="#register" class="ns-header-btn ns-theme-btn">Comenzar mi registro<i class="fal fa-arrow-right"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -153,7 +172,7 @@
             <!-- banner area end -->
 
 <!-- contact area start -->
-<section class="pt-110 pb-115">
+<div id="register" class="pt-110 pb-115">
     <div class="ns-contact-container container">
         <div class="ns-inner-wrap">
             <div class="ns-contact-space">
@@ -194,9 +213,19 @@
                                         <label for="session_date" class="form-label">Fecha de sesión</label>
                                         <select class="form-select" id="session_date" name="session_date" required>
                                             <option value="" disabled selected>Selecciona tu fecha de sesión</option>
-                                            <option value="2025-09-15">24 de septiembre</option>
-                                            <option value="2025-09-17">8 de octubre</option>
-                                            <option value="2025-09-19">22 de octubre</option>
+                                            <option value="2025-10-01">1 de octubre</option>
+                                            <option value="2025-10-15">15 de octubre</option>
+                                            <option value="2025-10-29">29 de octubre</option>
+                                            <option value="2025-11-12">12 de noviembre</option>
+                                            <option value="2025-11-26">26 de noviembre</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="session_time" class="form-label">Horario de sesión</label>
+                                        <select class="form-select" id="session_time" name="session_time" required>
+                                            <option value="" disabled selected>Selecciona tu horario de sesión</option>
+                                            <option value="12:00">12:00 PM</option>
+                                            <option value="16:00">04:00 PM</option>
                                         </select>
                                     </div>
 
@@ -224,6 +253,12 @@
                                     </script>
                                 </div>
                             </form>
+                            
+                            <div class="loading-overlay" id="overlay">
+                                <div class="spinner" aria-label="Enviando..."></div>
+                            </div>
+                            
+                            <div id="form-message" class="alert" role="alert"></div>
                         </div>
                     </div>
 
@@ -258,7 +293,7 @@
                                     <p>% de descuento en tu <strong>primera compra de EPP</strong>.</p>
                                 </div>
                             </div>
-
+                            
                             <!-- Beneficio 2 -->
                             <div class="ns-contact-item ns-address">
                                 <div class="ns-contact-item-icon">
@@ -987,6 +1022,161 @@
         <script src="assets/js/odometer.min.js"></script>
         <script src="assets/js/appear.min.js"></script>
         <script src="assets/js/main.js"></script>
+
+
+        <script>
+            // ===== CONFIG =====
+            const GAS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwrb_ZvlzYMdPZIQQBlbVfBjxDiMzoroPblOUwRldj5VU_TwuyKPDinBLiUE5OK722HLw/exec'; // Pega aquí la URL del deploy
+          
+            document.addEventListener('DOMContentLoaded', async function() {
+              const form = document.querySelector('.webinar-form');
+              const sessionDateSelect = document.getElementById('session_date');
+              const sessionTimeSelect = document.getElementById('session_time');
+              const submitButton = document.getElementById('submit_button');
+              const defaultButtonText = 'Agendar mi lugar';
+              const overlay = document.getElementById('overlay');
+              const alertBox = document.getElementById('form-message');
+          
+              function showAlert(type, text) {
+                alertBox.className = 'alert alert-' + type + ' show';
+                alertBox.textContent = text;
+              }
+              function clearAlert() {
+                alertBox.className = 'alert';
+                alertBox.textContent = '';
+              }
+              function setLoading(isLoading) {
+                if (isLoading) {
+                  overlay.classList.add('active');
+                  submitButton.disabled = true;
+                } else {
+                  overlay.classList.remove('active');
+                  submitButton.disabled = false;
+                }
+              }
+              function updateButtonText() {
+                const selectedOption = sessionDateSelect.options[sessionDateSelect.selectedIndex];
+                if (selectedOption && selectedOption.value !== '') {
+                  submitButton.textContent = `Agendar el ${selectedOption.textContent}`;
+                } else {
+                  submitButton.textContent = defaultButtonText;
+                }
+              }
+          
+              // ===== Cargar disponibilidad desde GAS =====
+              let availability = [];
+              async function loadAvailability() {
+                try {
+                  const res = await fetch(GAS_WEBAPP_URL + '?action=availability');
+                  const json = await res.json();
+                  if (!json.ok) throw new Error(json.error || 'Error de disponibilidad');
+                  availability = json.days || [];
+                  populateDates();
+                } catch (err) {
+                  showAlert('danger', 'No se pudo cargar disponibilidad. Intenta más tarde.');
+                  console.error(err);
+                }
+              }
+          
+              function populateDates() {
+                // Limpia, deja el "placeholder"
+                sessionDateSelect.innerHTML = '<option value="" disabled selected>Selecciona tu fecha de sesión</option>';
+                availability.forEach(day => {
+                  if ((day.times||[]).length > 0) {
+                    // Convierte "YYYY-MM-DD" a etiqueta legible (opcional)
+                    const label = toReadableDate(day.date);
+                    const opt = document.createElement('option');
+                    opt.value = day.date;
+                    opt.textContent = label;
+                    sessionDateSelect.appendChild(opt);
+                  }
+                });
+                updateButtonText();
+                populateTimes(); // limpia horarios
+              }
+          
+              function toReadableDate(iso) {
+                // Mostrar como "1 de octubre" en es-MX
+                const dt = new Date(iso + 'T12:00:00'); // evitar TZ offset
+                return dt.toLocaleDateString('es-MX', { day: 'numeric', month: 'long' });
+              }
+          
+              function populateTimes() {
+                sessionTimeSelect.innerHTML = '<option value="" disabled selected>Selecciona tu horario de sesión</option>';
+                const date = sessionDateSelect.value;
+                if (!date) return;
+                const day = availability.find(d => d.date === date);
+                (day?.times || []).forEach(t => {
+                  const opt = document.createElement('option');
+                  opt.value = t;
+                  opt.textContent = toReadableTime(t);
+                  sessionTimeSelect.appendChild(opt);
+                });
+              }
+          
+              function toReadableTime(hhmm) {
+                // "12:00" -> "12:00 PM" (es-MX)
+                const [h, m] = hhmm.split(':').map(Number);
+                const d = new Date();
+                d.setHours(h, m, 0, 0);
+                return d.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
+              }
+          
+              sessionDateSelect.addEventListener('change', () => {
+                populateTimes();
+                updateButtonText();
+              });
+          
+              // ===== Envío del formulario =====
+              form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                clearAlert();
+          
+                const payload = {
+                  full_name: document.getElementById('full_name').value.trim(),
+                  company: document.getElementById('company').value.trim(),
+                  job_title: document.getElementById('job_title').value.trim(),
+                  email: document.getElementById('email').value.trim(),
+                  phone: document.getElementById('phone').value.trim(),
+                  session_date: document.getElementById('session_date').value,
+                  session_time: document.getElementById('session_time').value
+                };
+          
+                if (!payload.session_date || !payload.session_time) {
+                  showAlert('danger', 'Selecciona una fecha y un horario.');
+                  return;
+                }
+          
+                setLoading(true);
+                try {
+                  const res = await fetch(GAS_WEBAPP_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                  });
+                  const json = await res.json();
+                  if (!json.ok) throw new Error(json.error || 'Error al registrar');
+          
+                  showAlert('success', '¡Listo! Te enviamos un correo con la confirmación.');
+                  form.reset();
+                  updateButtonText();
+          
+                  // Recargar disponibilidad para remover el horario tomado
+                  await loadAvailability();
+                } catch (err) {
+                  console.error(err);
+                  showAlert('danger', err.message || 'Ocurrió un error. Intenta nuevamente.');
+                } finally {
+                  setLoading(false);
+                }
+              });
+          
+              // Init
+              updateButtonText();
+              await loadAvailability();
+            });
+          </script>
+          
     </body>
 
 <!-- Mirrored from devsaidul.com/tf/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 02 Sep 2025 04:04:49 GMT -->
