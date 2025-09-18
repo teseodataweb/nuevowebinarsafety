@@ -1025,17 +1025,15 @@
 
 
         <script>
-            // ===== CONFIG =====
-            const GAS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbxF7cpqT8w76UAltXSzqDpFwlrxhDxoCX6tX7Iu325dN4DnGyLRM3nWAzSkqdstsX_9gA/exec'; // Pega aquí la URL del deploy
+            const GAS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbyB4L5Vi73kifyMl2UfnP4XHMlD5jnufda9eY4-m-Ff9HI4rf1TrsJA4Fzq_eEal7MrcA/exec'; // pega tu URL
           
-            document.addEventListener('DOMContentLoaded', async function() {
+            document.addEventListener('DOMContentLoaded', function () {
               const form = document.querySelector('.webinar-form');
-              const sessionDateSelect = document.getElementById('session_date');
-              const sessionTimeSelect = document.getElementById('session_time');
               const submitButton = document.getElementById('submit_button');
-              const defaultButtonText = 'Agendar mi lugar';
-              const overlay = document.getElementById('overlay');
+              const sessionDateSelect = document.getElementById('session_date');
               const alertBox = document.getElementById('form-message');
+              const overlay = document.getElementById('overlay');
+              const defaultButtonText = 'Agendar mi lugar';
           
               function showAlert(type, text) {
                 alertBox.className = 'alert alert-' + type + ' show';
@@ -1045,128 +1043,40 @@
                 alertBox.className = 'alert';
                 alertBox.textContent = '';
               }
-              function setLoading(isLoading) {
-                if (isLoading) {
-                  overlay.classList.add('active');
-                  submitButton.disabled = true;
-                } else {
-                  overlay.classList.remove('active');
-                  submitButton.disabled = false;
-                }
+              function setLoading(v) {
+                if (v) { overlay?.classList?.add('active'); submitButton.disabled = true; }
+                else { overlay?.classList?.remove('active'); submitButton.disabled = false; }
               }
               function updateButtonText() {
                 const selectedOption = sessionDateSelect.options[sessionDateSelect.selectedIndex];
-                if (selectedOption && selectedOption.value !== '') {
-                  submitButton.textContent = `Agendar el ${selectedOption.textContent}`;
-                } else {
-                  submitButton.textContent = defaultButtonText;
-                }
+                submitButton.textContent = selectedOption && selectedOption.value !== ''
+                  ? `Agendar el ${selectedOption.textContent}` : defaultButtonText;
               }
+              updateButtonText();
+              sessionDateSelect.addEventListener('change', updateButtonText);
           
-              // ===== Cargar disponibilidad desde GAS =====
-              let availability = [];
-              async function loadAvailability() {
-                try {
-                  const res = await fetch(GAS_WEBAPP_URL + '?action=availability');
-                  const json = await res.json();
-                  if (!json.ok) throw new Error(json.error || 'Error de disponibilidad');
-                  availability = json.days || [];
-                  populateDates();
-                } catch (err) {
-                  showAlert('danger', 'No se pudo cargar disponibilidad. Intenta más tarde.');
-                  console.error(err);
-                }
-              }
-          
-              function populateDates() {
-                // Limpia, deja el "placeholder"
-                sessionDateSelect.innerHTML = '<option value="" disabled selected>Selecciona tu fecha de sesión</option>';
-                availability.forEach(day => {
-                  if ((day.times||[]).length > 0) {
-                    // Convierte "YYYY-MM-DD" a etiqueta legible (opcional)
-                    const label = toReadableDate(day.date);
-                    const opt = document.createElement('option');
-                    opt.value = day.date;
-                    opt.textContent = label;
-                    sessionDateSelect.appendChild(opt);
-                  }
-                });
-                updateButtonText();
-                populateTimes(); // limpia horarios
-              }
-          
-             
-                function toReadableDate(iso) {
-                    // Esperamos 'YYYY-MM-DD'
-                    const parts = iso.split('-');
-                    if (parts.length !== 3) return iso; // fallback, por si llegara algo raro
-                    const [y, m, d] = parts.map(Number);
-                    const dt = new Date(y, m - 1, d);
-                    return dt.toLocaleDateString('es-MX', { day: 'numeric', month: 'long' });
-                }
-          
-              function populateTimes() {
-                sessionTimeSelect.innerHTML = '<option value="" disabled selected>Selecciona tu horario de sesión</option>';
-                const date = sessionDateSelect.value;
-                if (!date) return;
-                const day = availability.find(d => d.date === date);
-                (day?.times || []).forEach(t => {
-                  const opt = document.createElement('option');
-                  opt.value = t;
-                  opt.textContent = toReadableTime(t);
-                  sessionTimeSelect.appendChild(opt);
-                });
-              }
-          
-              function toReadableTime(hhmm) {
-                // "12:00" -> "12:00 PM" (es-MX)
-                const [h, m] = hhmm.split(':').map(Number);
-                const d = new Date();
-                d.setHours(h, m, 0, 0);
-                return d.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
-              }
-          
-              sessionDateSelect.addEventListener('change', () => {
-                populateTimes();
-                updateButtonText();
-              });
-          
-              // ===== Envío del formulario =====
               form.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 clearAlert();
           
-                const payload = {
-                  full_name: document.getElementById('full_name').value.trim(),
-                  company: document.getElementById('company').value.trim(),
-                  job_title: document.getElementById('job_title').value.trim(),
-                  email: document.getElementById('email').value.trim(),
-                  phone: document.getElementById('phone').value.trim(),
-                  session_date: document.getElementById('session_date').value,
-                  session_time: document.getElementById('session_time').value
-                };
-          
-                if (!payload.session_date || !payload.session_time) {
+                // Valida que haya fecha/hora
+                if (!sessionDateSelect.value || !document.getElementById('session_time').value) {
                   showAlert('danger', 'Selecciona una fecha y un horario.');
                   return;
                 }
           
+                // Envía como FormData (compatible con doPost)
+                const formData = new FormData(form);
+          
                 setLoading(true);
                 try {
-                  const res = await fetch(GAS_WEBAPP_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                  });
+                  const res = await fetch(GAS_WEBAPP_URL, { method: 'POST', body: formData });
                   const json = await res.json();
                   if (!json.ok) throw new Error(json.error || 'Error al registrar');
           
                   showAlert('success', '¡Listo! Te enviamos un correo con la confirmación.');
                   form.reset();
                   updateButtonText();
-          
-                  // Recargar disponibilidad para remover el horario tomado
-                  await loadAvailability();
                 } catch (err) {
                   console.error(err);
                   showAlert('danger', err.message || 'Ocurrió un error. Intenta nuevamente.');
@@ -1174,12 +1084,9 @@
                   setLoading(false);
                 }
               });
-          
-              // Init
-              updateButtonText();
-              await loadAvailability();
             });
           </script>
+          
           
     </body>
 
